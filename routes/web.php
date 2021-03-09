@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\statusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +38,6 @@ Route::get('/distribution/index', 'DistributionController@index')->middleware(['
 Route::get('/priority/index', 'PriorityController@index')->middleware(['auth'])->name('priority');
 Route::get('/sla/index', 'SlaController@index')->middleware(['auth'])->name('sla');
 Route::get('/ticket/index', 'TicketController@index')->middleware(['auth'])->name('ticket');
-Route::get('/ticket/index/{id}', 'TicketController@filtertickets')->middleware(['auth'])->name('inprogressticket');
 
 
 Route::get('/location/create', 'LocationController@create')->middleware(['auth'])->name('locationcreate');
@@ -102,8 +100,6 @@ Route::get('/asm/edit/{id}', 'AsmController@edit')->middleware(['auth'])->name('
 Route::any('/asm/modify/{id}', 'AsmController@modify')->middleware(['auth'])->name('asmupdate');
 Route::get('/asm/delete/{id}', 'AsmController@delete')->middleware(['auth'])->name('asmdelete');
 
-
-
 Route::get('/user/create', 'UserController@create')->middleware(['auth'])->name('usercreate');
 Route::post('/user/save', 'UserController@save')->middleware(['auth'])->name('usersave');
 Route::get('/user/edit/{id}', 'UserController@edit')->middleware(['auth'])->name('userupdate');
@@ -127,8 +123,6 @@ Route::post('/priority/save', 'PriorityController@save')->middleware(['auth'])->
 Route::get('/priority/edit/{id}', 'PriorityController@edit')->middleware(['auth'])->name('priorityupdate');
 Route::any('/priority/modify/{id}', 'PriorityController@modify')->middleware(['auth'])->name('priorityupdate');
 Route::get('/priority/delete/{id}', 'PriorityController@delete')->middleware(['auth'])->name('prioritydelete');
-
-
 
 Route::get('/sla/create', 'SlaController@create')->middleware(['auth'])->name('slacreate');
 Route::post('/sla/save', 'SlaController@save')->middleware(['auth'])->name('slasave');
