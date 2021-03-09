@@ -23,39 +23,48 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-  @yield('title')
+    @yield('title')
   </title>
+  @yield('style')
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- CSS Files -->
+
+
   <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/now-ui-dashboard.css?v=1.5.0') }}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
   <style>
-  .bootstrap-select>.dropdown-toggle.bs-placeholder{
-    color:#2c2c2c !important;
-  }
-  .btn.dropdown-toggle.btn-light,.btn.dropdown-toggle.btn-light:hover,.btn.dropdown-toggle.btn-light:active{
-    background-color: transparent;
-    border: 1px solid #E3E3E3;
-    border-radius: 30px;
-    color: #2c2c2c;
-    line-height: normal;
-    height: auto;
-    font-size: 0.8571em;
-    margin-top:0px;
-  }
+    .bootstrap-select>.dropdown-toggle.bs-placeholder {
+      color: #2c2c2c !important;
+    }
+
+    .btn.dropdown-toggle.btn-light,
+    .btn.dropdown-toggle.btn-light:hover,
+    .btn.dropdown-toggle.btn-light:active {
+      background-color: transparent;
+      border: 1px solid #E3E3E3;
+      border-radius: 30px;
+      color: #2c2c2c;
+      line-height: normal;
+      height: auto;
+      font-size: 0.8571em;
+      margin-top: 0px;
+    }
   </style>
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body class="">
-<?php 
-$company = App\Models\Company::find(Auth::user()->company_id);
-?>
+  <?php
+  $company = App\Models\Company::find(Auth::user()->company_id);
+  ?>
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -66,11 +75,11 @@ $company = App\Models\Company::find(Auth::user()->company_id);
           CT
         </a> -->
         <a href="/dashboard" class="simple-text logo-normal">
-        @if(!empty($company))
+          @if(!empty($company))
           {{ $company->name}}
-        @else
+          @else
           {{__("Company Name")}}
-        @endif
+          @endif
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -82,66 +91,68 @@ $company = App\Models\Company::find(Auth::user()->company_id);
             </a>
           </li>
           <li>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="now-ui-icons text_caps-small"></i>    
-                    Configuration
-                </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="/company/index">Manage Compnay</a>
-                    </li>
-                    <li>
-                        <a href="/campaign/index">Manage Campaign</a>
-                    </li>
-                    <li>
-                        <a href="/item/index">Manage Item</a>
-                    </li>
-                    <li>
-                        <a href="/department/index">Manage Department</a>
-                    </li>
-                    <li>
-                        <a href="/asm/index">Manage Asm</a>
-                    </li>
-                    <li>
-                        <a href="/priority/index">Manage Priority</a>
-                    </li>
-                    <li>
-                        <a href="/location/index">Manage Location</a>
-                    </li>
-                    <li>
-                        <a href="/client/index">Manage Client</a>
-                    </li>
-                    <li>
-                        <a href="/category/index">Manage Category</a>
-                    </li>
-                    <li>
-                        <a href="/type/index">Manage Type</a>
-                    </li>
-                    <li>
-                        <a href="/staff/index">Manage Staff</a>
-                    </li>
-                    <?php if(Auth::user()->email == "ashher.azad@gmail.com" || Auth::user()->email == "asher@servex247.com"  || Auth::user()->email == "bilalamjad2772@outlook.com" ){ ?>
-                    <li>
-                        <a href="/user/index">Manage User</a>
-                    </li>
-                    <?php } ?>
-                    <li>
-                        <a href="/group/index">Manage Group</a>
-                    </li>
-                    <li>
-                        <a href="/sla/index">Manage SLA</a>
-                    </li>
-                    <li>
-                        <a href="/distribution/index">Manage Distribution</a>
-                    </li>
-                </ul>
+            <a href="/ticket/index" class="dropdown-toggless">
+              <i class="now-ui-icons text_caps-small"></i>
+              Tickets
+            </a>
           </li>
           <li>
-              <a href="/ticket/index" class="dropdown-toggless">
-                    <i class="now-ui-icons text_caps-small"></i>    
-                    Tickets
-              </a>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              <i class="now-ui-icons text_caps-small"></i>
+              Configuration
+            </a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+              <li>
+                <a href="/company/index">Manage Compnay</a>
+              </li>
+              <li>
+                <a href="/campaign/index">Manage Campaign</a>
+              </li>
+              <li>
+                <a href="/item/index">Manage Item</a>
+              </li>
+              <li>
+                <a href="/department/index">Manage Department</a>
+              </li>
+              <li>
+                <a href="/asm/index">Manage Asm</a>
+              </li>
+              
+              <li>
+                <a href="/priority/index">Manage Priority</a>
+              </li>
+              <li>
+                <a href="/location/index">Manage Location</a>
+              </li>
+              <li>
+                <a href="/client/index">Manage Client</a>
+              </li>
+              <li>
+                <a href="/category/index">Manage Category</a>
+              </li>
+              <li>
+                <a href="/type/index">Manage Type</a>
+              </li>
+              <li>
+                <a href="/staff/index">Manage Staff</a>
+              </li>
+              <?php if (Auth::user()->email == "ashher.azad@gmail.com" || Auth::user()->email == "asher@servex247.com"  || Auth::user()->email == "bilalamjad2772@outlook.com") { ?>
+                <li>
+                  <a href="/user/index">Manage User</a>
+                </li>
+              <?php } ?>
+              <li>
+                <a href="/group/index">Manage Group</a>
+              </li>
+              <li>
+                <a href="/sla/index">Manage SLA</a>
+              </li>
+              <li>
+                <a href="/distribution/index">Manage Distribution</a>
+              </li>
+            </ul>
           </li>
+
         </ul>
       </div>
     </div>
@@ -197,6 +208,14 @@ $company = App\Models\Company::find(Auth::user()->company_id);
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </li> -->
+
+              <li class="nav-item">
+                <a class="nav-link" href="/ticket/create">
+                  <!-- <i class="now-ui-icons users_single-02"></i> -->
+                  <i class="fas fa-plus-circle "></i>
+                  Create Ticket
+                </a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">
                   <i class="now-ui-icons users_single-02"></i>
@@ -259,14 +278,30 @@ $company = App\Models\Company::find(Auth::user()->company_id);
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('assets/js/now-ui-dashboard.min.js?v=1.5.0') }}" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{ asset('assets/demo/demo.js') }}"></script>
+  <script src="{{ asset('js/select2.min.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
   @yield('scripts')
 </body>
+<script>
+  // Data Table
+  $(document).ready(function() {
+    $('#tickettable').DataTable();
+  });
+</script>
+<!-- Multi selecter in ticket form -->
+<script>
+  $(".ticketinput").select2({
+    placeholder: "Select",
+    allowClear: true,
+  });
+</script>
+
 
 </html>
 
 <script>
-  $( document ).ready(function() {
+  $(document).ready(function() {
     $('.multi-select').selectpicker();
   });
-  </script>
+</script>

@@ -66,10 +66,10 @@ class DistributionController extends Controller
         $type_array = Type::all()->keyBy('type_id');
         $category_array = Category::all()->keyBy('category_id');
         $status_array = array("0"=>"Enable","1"=>"Disable");
-        $model = Distribution::where('location_id', $id)
-            ->firstOrFail();
+        $model = Distribution::where('location_id', $id)->firstOrFail();
         
-        return view('distribution.change', [
+        return view('distribution.change',
+         [
             'model' => $model,
             'slab' => $slab_array,
             'location' => $location_array,
@@ -78,7 +78,8 @@ class DistributionController extends Controller
             'company' => $company_array,
             'type' => $type_array,
             'category' => $category_array,
-        ]);
+        ]
+    );
     }
 
     public function save(Request $request){
